@@ -1,13 +1,15 @@
 import { useSelector } from "react-redux";
 import { getAllmovies } from "../../features/movies/movieSlice";
 import MovieCard from "../movie-card/MovieCard";
+import './movieListing.scss'
 
 const MovieListing = () => {
   const movies = useSelector(getAllmovies);
+  // console.log("Movies: ", movies);
 
   let renderMovies = "";
   renderMovies =
-    movies.response === "True" ? (
+    movies.Response === "True" ? (
       movies.Search.map((movie, index) => (
         <MovieCard key={index} data={movie} />
       ))

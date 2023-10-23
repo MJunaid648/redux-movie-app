@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+
 const initialState = {
   movies: {},
 };
@@ -8,7 +9,7 @@ const movieSlice = createSlice({
   initialState,
   reducers: {
     addMovies: (state, payload) => {
-      state.movies = payload;
+      state.movies = payload.payload;
     },
   },
 });

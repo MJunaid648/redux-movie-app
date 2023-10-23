@@ -6,22 +6,21 @@ import { useDispatch } from "react-redux";
 import { addMovies } from "../../features/movies/movieSlice";
 
 const Home = () => {
-  const movieText = "Harry";
+  const movieText = "harry";
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchMovies = async () => {
       const response = await movieApi
-        .get(`?apiKey=${APIKey}&s=${movieText}&type=series`)
+        .get(`?apiKey=${APIKey}&s=${movieText}&type=movie`)
         .catch((err) => {
           console.log("err", err);
         });
-      // console.log("response is:", response);
       dispatch(addMovies(response.data));
     };
 
     fetchMovies();
-  }, []);
+  },[]);
   return (
     <div>
       <div className="banner-img"></div>

@@ -3,20 +3,18 @@ import movieApi from "../../common/APIs/MovieApi";
 import { APIKey } from "../../common/APIs/MovieApiKey";
 export const fetchAsyncMovies = createAsyncThunk(
   "movies/fetchAsyncMovies",
-  async () => {
-    const movieText = "harry";
+  async (term) => {
     const response = await movieApi.get(
-      `?apiKey=${APIKey}&s=${movieText}&type=movie`
+      `?apiKey=${APIKey}&s=${term}&type=movie`
     );
     return response.data;
   }
 );
 export const fetchAsyncShows = createAsyncThunk(
   "shows/fetchAsyncShows",
-  async () => {
-    const ShowsText = "friends";
+  async (term) => {
     const response = await movieApi.get(
-      `?apiKey=${APIKey}&s=${ShowsText}&type=series`
+      `?apiKey=${APIKey}&s=${term}&type=series`
     );
     return response.data;
   }
@@ -32,6 +30,7 @@ const initialState = {
   movies: {},
   shows: {},
   selectedMovieOrShow: {},
+  loading: false,
 };
 const movieSlice = createSlice({
   name: "movies",
@@ -41,29 +40,35 @@ const movieSlice = createSlice({
       state.selectedMovieOrShow = {};
     },
   },
-  extraReducers: {
-    [fetchAsyncMovies.pending]: () => {
+  extraReducers: (builder) => {
+    builder.addCase(fetchAsyncMovies.pending, (state) => {
       console.log("Pending");
-    },
-    [fetchAsyncMovies.fulfilled]: (state, { payload }) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(fetchAsyncMovies.fulfilled, (state, { payload }) => {
       console.log("Fetched movies successfully");
-      return { ...state, movies: payload };
-    },
-    [fetchAsyncMovies.rejected]: () => {
+      return { ...state, movies: payload, loading: false };
+    });
+    builder.addCase(fetchAsyncMovies.rejected, (state) => {
       console.log("Rejected");
-    },
-    [fetchAsyncShows.fulfilled]: (state, { payload }) => {
+      return { ...state, loading: false };
+    });
+    builder.addCase(fetchAsyncShows.fulfilled, (state, { payload }) => {
       console.log("Fetched shows successfully");
-      return { ...state, shows: payload };
-    },
-    [fetchAsyncMovieOrShowDetails.fulfilled]: (state, { payload }) => {
-      console.log("Details fetched successfully");
-      return { ...state, selectedMovieOrShow: payload };
-    },
+      return { ...state, shows: payload, loading: false };
+    });
+    builder.addCase(
+      fetchAsyncMovieOrShowDetails.fulfilled,
+      (state, { payload }) => {
+        console.log("Details fetched successfully");
+        return { ...state, selectedMovieOrShow: payload, loading: false };
+      }
+    );
   },
 });
 export const { removeSelectedMovieOrShow } = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.movies;
+export const isLoading = (state) => state.movies.loading;
 export const getAllShows = (state) => state.movies.shows;
 export const getSelectedMovieOrShow = (state) =>
   state.movies.selectedMovieOrShow;

@@ -2,20 +2,32 @@ import { useEffect } from "react";
 import {
   fetchAsyncMovies,
   fetchAsyncShows,
+  isLoading,
 } from "../../features/movies/movieSlice";
 import MovieListing from "../movie-listing/MovieListing";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import "./home.scss";
+import loaderGif from "../../images/loader.gif";
+
 
 const Home = () => {
   const dispatch = useDispatch();
+  const movieText = "Harry";
+  const showText = "friends";
+  const loading = useSelector(isLoading);
   useEffect(() => {
-    dispatch(fetchAsyncMovies());
-    dispatch(fetchAsyncShows());
+    dispatch(fetchAsyncMovies(movieText));
+    dispatch(fetchAsyncShows(showText));
   }, [dispatch]);
   return (
     <div>
-      <div className="banner-img"></div>
-      <MovieListing />
+      {loading ? (
+        <div className="loader">
+          <img src={loaderGif} alt="Loading" />
+        </div>
+      ) : (
+        <MovieListing />
+      )}
     </div>
   );
 };

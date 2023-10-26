@@ -5,15 +5,14 @@
   box-sizing: border-box;
   font-family: "Open sans, sans-serif";
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
+  color: $font-primary;
 }
 
-body{
-    background-color: $primary-color;
+body {
+  background-color: $primary-color;
 }
-.container{
-    margin: 0px 40px;
-
-    
+.container {
+  margin: 0px 40px;
 }

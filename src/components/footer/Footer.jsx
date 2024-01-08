@@ -1,12 +1,10 @@
-import './footer.scss'
-
+import "./footer.scss";
 const Footer = () => {
   return (
-    <div className='footer'>
+    <footer>
       <div>Movie App</div>
-      <div>&copy;2023, Moie, Inc. or it's affiliates</div> 
-    </div>
-  )
-}
-
-export default Footer
+      <div>&copy;2023, Moie, Inc. or it's affiliates</div>
+    </footer>
+  );
+};
+export default Footer;

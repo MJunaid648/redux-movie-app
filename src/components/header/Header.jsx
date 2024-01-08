@@ -19,9 +19,9 @@ const Header = () => {
     setTerm("");
   };
   return (
-    <div className="header">
+    <header>
       <div className="logo">
-        <Link to="/">Movie App</Link>
+        <Link to="">Movie App</Link>
       </div>
       <div className="search-bar">
         <form onSubmit={submitHandler}>
@@ -37,9 +37,9 @@ const Header = () => {
         </form>
       </div>
       <div className="user-image">
-        <img src={userImg} alt="`user image" />
+        <img src={userImg} alt="`user" />
       </div>
-    </div>
+    </header>
   );
 };
 

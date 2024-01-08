@@ -1,10 +1,9 @@
 import { useSelector } from "react-redux";
 import Slider from "react-slick";
-import { getAllMovies, getAllShows } from "../../features/movies/movieSlice";
-import MovieCard from "../movie-card/MovieCard";
+import { getAllMovies, getAllShows } from "../../features/movies/movieSlice.js";
+import MovieCard from "../movie-card/MovieCard.jsx";
 import "./movieListing.scss";
-import { settings } from "../../common/settings";
-
+import { settings } from "../../common/settings.js";
 const MovieListing = () => {
   const movies = useSelector(getAllMovies);
   const shows = useSelector(getAllShows);

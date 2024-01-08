@@ -1,4 +1,4 @@
-@import "../src/common/colors.scss";
+@import "./common/colors.scss";
 * {
   padding: 0;
   margin: 0;
@@ -9,7 +9,6 @@ a {
   text-decoration: none;
   color: $font-primary;
 }
-
 body {
   background-color: $primary-color;
 }

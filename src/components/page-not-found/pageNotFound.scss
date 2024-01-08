@@ -1,0 +1,10 @@
+@import "../../common/colors.scss";
+.notFound {
+  height: 80vh;
+  color: $font-primary;
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  font-size: 2vw;
+  padding: 2vw;
+}
